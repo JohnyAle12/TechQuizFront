@@ -1,19 +1,19 @@
-import React from 'react'
+import { User } from '../interfaces/types'
 
-export const Users = () => {
+export const Users = (user: User) => {
   return (
-    <div className="col-3">
+    <div className="col-3 mt-3">
         <div className="card text-center">
             <div className="card-header">
-                Johny Prieto
+                { user.name } { user.lastname }
             </div>
             <div className="card-body">
                 <h5 className="card-title">Colombia</h5>
                 <p className="card-text">
-                    ID: 1031156901
-                    johny@mailsx.com
-                    Calle 123
-                    3137881164
+                    <i className="fa fa-id-card-o" aria-hidden="true"></i> { user.identification } <br/>
+                    <i className="fa fa-envelope-o" aria-hidden="true"></i> { user.email }<br/>
+                    <i className="fa fa-map-marker" aria-hidden="true"></i> { user.address } <br/>
+                    <i className="fa fa-mobile" aria-hidden="true"></i> { user.mobile }
                 </p>
                 <div className="row">
                     <a href="#" className="col btn btn-outline-success m-1">Modificar</a>
@@ -21,7 +21,7 @@ export const Users = () => {
                 </div>
             </div>
             <div className="card-footer text-body-secondary">
-                2 days ago
+                { new Date(user.created_at).toLocaleString('en-US') }
             </div>
         </div>
     </div>
