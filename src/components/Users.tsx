@@ -16,8 +16,12 @@ export const Users = (user: User) => {
                     <i className="fa fa-mobile" aria-hidden="true"></i> { user.mobile }
                 </p>
                 <div className="row">
-                    <a href="#" className="col btn btn-outline-success m-1">Modificar</a>
-                    <a href="#" className="col btn btn-outline-danger m-1">Eliminar</a>
+                    <a href="#" className="col btn btn-outline-success m-1">
+                        <i className="fa fa-pencil-square-o" aria-hidden="true"></i> Modificar
+                    </a>
+                    <a href="#" className="col btn btn-outline-danger m-1">
+                        <i className="fa fa-trash-o" aria-hidden="true"></i> Eliminar
+                    </a>
                 </div>
             </div>
             <div className="card-footer text-body-secondary">
