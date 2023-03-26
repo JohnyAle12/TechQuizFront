@@ -15,3 +15,8 @@ export interface User extends userRequest {
     updated_at: string;
     deleted_at?: string;   
 }
+
+export interface Country {
+    commonName: string; 
+    oficialName: string;
+}

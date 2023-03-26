@@ -17,17 +17,17 @@ export const Home = () => {
     }, [])
     return (
         <div className="container">
-        <div className="row">
-            <div className="col-12">
-            <NavBar />
-            </div>
-            <div className="col-12">
-            <h3 className='mt-4 mb-4'>Listado de usuarios</h3>
             <div className="row">
-                {users?.map((item) => <Users key={item.id} {...item}/>)}
+                <div className="col-12">
+                <NavBar />
+                </div>
+                <div className="col-12">
+                <h3 className='mt-4 mb-4'>Listado de usuarios</h3>
+                <div className="row">
+                    {users?.map((item) => <Users key={item.id} {...item}/>)}
+                </div>
+                </div>
             </div>
-            </div>
-        </div>
         </div>
     )
 }

@@ -5,7 +5,7 @@ import { Home } from '../Home'
 export const AppRouter = () => {
   return (
     <Routes>
-        <Route path="/crear" element={
+        <Route path="/users/create" element={
             <Form />
         } />
 
