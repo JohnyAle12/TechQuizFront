@@ -13,10 +13,15 @@ export interface User extends userRequest {
     id: number;
     created_at: string;
     updated_at: string;
-    deleted_at?: string;   
+    deleted_at?: string;
 }
 
 export interface Country {
     commonName: string; 
     oficialName: string;
+}
+
+export interface Category {
+    id: number; 
+    name: string;
 }

@@ -20,7 +20,16 @@ const saveUser = async(user: userRequest): Promise<void> => {
         });
 }
 
+const deleteUser = async(userId: number): Promise<void> => {
+    const url = urlBack + '/' + userId;
+    await axios.delete(url)
+        .catch(error => {
+            throw new Error(error.response.data.message);
+        });
+}
+
 export {
     getUser,
-    saveUser
+    saveUser,
+    deleteUser
 };

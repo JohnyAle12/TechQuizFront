@@ -5,11 +5,13 @@ import { saveUser } from '../services/userService';
 import { NavBar } from './NavBar'
 import { useEffect } from 'react';
 import { getCountries } from '../services/countryService';
-import { Country } from '../interfaces/types';
+import { Country, Category } from '../interfaces/types';
+import { getCategories } from '../services/categoryService';
 
 export const Form = () => {
     const navigate = useNavigate();
     const [countries, setCountries] = useState<Country[]>([]);
+    const [categories, setCategories] = useState<Category[]>([]);
     const [saveUserFailed, setSaveUserFailed] = useState<string>();
 
     const {
@@ -58,8 +60,14 @@ export const Form = () => {
         setCountries(countries);
     };
 
+    const setCategoriesList = async() => {
+        const categories = await getCategories();
+        setCategories(categories);
+    };
+
     useEffect(() => {
         setCountriesList();
+        setCategoriesList();
     }, [])
     
 
@@ -84,9 +92,9 @@ export const Form = () => {
                             <div className="mb-3">
                                 <label className="form-label">Categoría:</label>
                                 <select name="category" className="form-select" onChange={onInputChange}>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                    { categories.map((category, index) => (
+                                        <option key={index} value={ category.id }>{ category.name }</option>
+                                    )) }
                                 </select>
                             </div>
                             <div className="mb-3">
