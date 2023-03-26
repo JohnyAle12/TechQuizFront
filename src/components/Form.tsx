@@ -10,7 +10,7 @@ import { Country } from '../interfaces/types';
 export const Form = () => {
     const navigate = useNavigate();
     const [countries, setCountries] = useState<Country[]>([]);
-    const [saveUserFailed, setSaveUserFailed] = useState<boolean>(false);
+    const [saveUserFailed, setSaveUserFailed] = useState<string>();
 
     const {
         category,
@@ -23,7 +23,7 @@ export const Form = () => {
         mobile,
         onInputChange
     } = useForm({
-        category: 0,
+        category: 1,
         name: '',
         lastname: '',
         identification: 123,
@@ -46,9 +46,9 @@ export const Form = () => {
             address,
             mobile,
         })
-            .catch(() => setSaveUserFailed(true))
-        
-        if(!saveUserFailed) return;
+            .catch((error) => setSaveUserFailed(error.message))
+            
+        if(saveUserFailed || saveUserFailed === undefined) return;
 
         navigate('/');
     }
@@ -74,12 +74,13 @@ export const Form = () => {
 
                     { saveUserFailed && (
                         <div className="alert alert-danger" role="alert">
-                            Ocurrio un error al guardar el usuario!
+                            Ocurrio un error al guardar el usuario! <br/>
+                            {saveUserFailed}
                         </div>
                     )}
 
-                    <div className="row">
-                        <form className="col-4" onSubmit={onFormSubmit}>
+                    <form className="row" onSubmit={onFormSubmit}>
+                        <div className="col-4">
                             <div className="mb-3">
                                 <label className="form-label">Categoría:</label>
                                 <select name="category" className="form-select" onChange={onInputChange}>
@@ -100,6 +101,8 @@ export const Form = () => {
                                 <label className="form-label">Identificación:</label>
                                 <input type="number" name="identification" className="form-control" value={identification} onChange={onInputChange} required/>
                             </div>
+                        </div>
+                        <div className="col-4">
                             <div className="mb-3">
                                 <label className="form-label">Correo electrónico:</label>
                                 <input type="email" name="email" className="form-control" value={email} onChange={onInputChange} required/>
@@ -107,8 +110,8 @@ export const Form = () => {
                             <div className="mb-3">
                                 <label className="form-label">País:</label>
                                 <select name="country" className="form-select" onChange={onInputChange}>
-                                    { countries.map((country) => (
-                                        <option value={ country.commonName }>{ country.commonName }</option>
+                                    { countries.map((country, index) => (
+                                        <option key={index} value={ country.commonName }>{ country.commonName }</option>
                                     )) }
                                 </select>
                             </div>
@@ -120,9 +123,11 @@ export const Form = () => {
                                 <label className="form-label">Celular:</label>
                                 <input type="text" name="mobile" className="form-control" value={mobile} onChange={onInputChange} required/>
                             </div>
-                            <button className="btn btn-primary" type="submit">Guardar</button>
-                        </form>
-                    </div>
+                        </div>
+                        <div className="col-6">
+                            <button className="btn btn-success" type="submit">Guardar</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
